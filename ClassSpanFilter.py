@@ -24,7 +24,6 @@ def extract_keywords(topK_for_textbook=8, topK_for_blog=4):
     lines = blog.readlines()
     for line in lines:
         line = line.strip()
-        # print(line)
         extracted = jieba.analyse.extract_tags(sentence=line, topK=topK_for_blog)
         for i in extracted:
             if i in keywords.keys():
