@@ -34,6 +34,8 @@ def extract_keywords(topK_for_textbook=8, topK_for_blog=4):
     keywords = dict(sorted(keywords.items(), key=lambda x: x[1], reverse=True))
     #print(keywords)
     
+    return keywords
+    
 # e.g. keywords = {'文档': 10, '文本': 10, '聚类': 10}, the value is the extracted frequency of the keywords, which can be interpreted as importance
 keywords = extract_keywords(topK_for_textbook=8, topK_for_blog=4)
 
