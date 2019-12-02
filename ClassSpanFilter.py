@@ -42,6 +42,10 @@ def extract_keywords(topK_for_textbook=8, topK_for_blog=4):
     
 # e.g. keywords = {'文档': 10, '文本': 10, '聚类': 10}, the value is the extracted frequency of the keywords, which can be interpreted as importance
 keywords = extract_keywords(topK_for_textbook=8, topK_for_blog=4)
+keywords_list = []
+for k,v in keywords.items():
+    keywords_list.append(k.lower())
+print("keywords_list:", keywords_list)
 
 # get input sentences of tapescripts
 # e.g. sentences = ["这是一个句子。","那是一个句子。"]
@@ -53,7 +57,7 @@ sentence_num = int(len(tmp_sents)/2)
 for i in range(sentence_num):
     sent = tmp_sents[2*i] + tmp_sents[2*i+1]
     sentences.append(sent)
-print(sentences)
+# print("sentences:", sentences)
 
 # retrieve corpus from sentences.
 corpus = []
@@ -63,7 +67,7 @@ for i in range(sentence_num):
     for item in words_list:
         words = words + item + " "
     corpus.append(words)
-print(corpus)
+# print("corpus:", corpus)
 
 vectorizer = CountVectorizer()
 X = vectorizer.fit_transform(corpus)
@@ -71,24 +75,24 @@ X = vectorizer.fit_transform(corpus)
 # get all words appeared in corpus
 word = vectorizer.get_feature_names()
 word_num = len(word)
-print(word)
+# print("word:", word)
+
 # get words appeared in keywords
 keywords_index = []
 for j in range(word_num):
-    if word[j] in keywords:
+    if word[j] in keywords_list:
         keywords_index.append(j)
 appeared_keywords_num = len(keywords_index)
 
 # get term frequency of each word at each sentence
 counts = X.toarray()
-print(counts)
+# print("counts:", counts)
 
 # get tf-idf value of each word at each sentence
 transformer = TfidfTransformer()
 tfidf = transformer.fit_transform(X)
 tfidf_array = tfidf.toarray()
-print(tfidf_array)
-
+# print("tfidf:", tfidf_array)
 
 # calculate the importance of each sentence
 # e.g. sentence_scores = [3.2,5.1]
@@ -98,6 +102,6 @@ for i in range(sentence_num):
     for j in range(appeared_keywords_num):
         score = score + tfidf_array[i][keywords_index[j]]
     sentence_scores.append(score)
-print(sentence_scores)
+print("scores:", sentence_scores)
 
 # display the result in various ways
