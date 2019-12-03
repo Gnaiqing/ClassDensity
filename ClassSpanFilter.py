@@ -111,18 +111,23 @@ for i in range(sentence_num):
 
 #print("scores:", sentence_scores)
 
+######################################################
+## 储存一些中间结果用于可视化
+######################################################
 # 将整个得分放到一个正方形中，存在文件里
 grids = []
 grid_len = int(math.sqrt(len(sentence_scores))) + 1
 for sc in sentence_scores:
     pos,val = sc
-    grids.append([pos/grid_len,pos%grid_len,val])
+    grids.append([int(pos/grid_len),pos%grid_len,val])
 
 with open("grids_res.txt",'w') as f:
     print(grids,file=f)
 
 pseudo_time = []
+acc_tiredness = []
 inc = 0
+trd = 0
 for sc in sentence_scores:
     pos,_ = sc
     pseudo_time.append(inc)
@@ -131,6 +136,8 @@ for sc in sentence_scores:
 with open("time_res.txt",'w') as f:
     print([list(x) for x in list(zip(pseudo_time,[x[1] for x in sentence_scores]))],file=f)
 
+######################################################
+######################################################
 
 # display the result in various ways
 def takeSecond(elem):

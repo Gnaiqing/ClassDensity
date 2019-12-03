@@ -3,6 +3,7 @@
    <head>
        <meta charset="utf-8">
    </head>
+   <a href="heatmap-large-piecewise.html">点击前往热力图</a>
    <body style="height: 100%; margin: 0">
        <div id="container" style="height: 100%"></div>
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
@@ -18,6 +19,10 @@ var myChart = echarts.init(dom);
 var app = {};
 option = null;
 option = {
+  title: {
+            //title的text是主标题的文本
+            text: '课程内容的重要性随时间的变化'
+        },  
    dataZoom: [
         {
             //设置类型是滑动条型组件
@@ -47,5 +52,6 @@ if (option && typeof option === "object") {
     myChart.setOption(option, true);
 }
        </script>
+  
    </body>
 </html>
