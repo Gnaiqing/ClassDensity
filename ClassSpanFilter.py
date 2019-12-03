@@ -1,5 +1,6 @@
 # This is the basic framework for ClassSpamFilter
 import jieba
+import math
 import jieba.analyse
 from sklearn import feature_extraction
 from sklearn.feature_extraction.text import CountVectorizer
@@ -108,20 +109,42 @@ for i in range(sentence_num):
     sentence_scores.append((i, score))
 
 
-# print("scores:", sentence_scores)
+#print("scores:", sentence_scores)
+
+# 将整个得分放到一个正方形中，存在文件里
+grids = []
+grid_len = int(math.sqrt(len(sentence_scores))) + 1
+for sc in sentence_scores:
+    pos,val = sc
+    grids.append([pos/grid_len,pos%grid_len,val])
+
+with open("grids_res.txt",'w') as f:
+    print(grids,file=f)
+
+pseudo_time = []
+inc = 0
+for sc in sentence_scores:
+    pos,_ = sc
+    pseudo_time.append(inc)
+    inc += len(sentences[pos])
+
+with open("time_res.txt",'w') as f:
+    print([list(x) for x in list(zip(pseudo_time,[x[1] for x in sentence_scores]))],file=f)
+
 
 # display the result in various ways
 def takeSecond(elem):
     return elem[1]
-
 
 sentence_scores.sort(key=takeSecond)
 k = 10
 print("Top ", k, "Relevant Sentences:")
 for i in range(k):
     print(sentences[sentence_scores[-i-1][0]])
+    #print(sentence_scores[-i-1])
 
 print("Top ",k, "Irrelevant Sentences:")
 for i in range(k):
     print(sentences[sentence_scores[i][0]])
+    
 
