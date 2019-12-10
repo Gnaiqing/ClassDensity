@@ -1,4 +1,4 @@
-# ClassSpamFilter
+# ClassDensity
 This is one homework of the course *Introduction to Modern IR* of Peking University.
 
 ## files
@@ -11,6 +11,6 @@ This is one homework of the course *Introduction to Modern IR* of Peking Univers
 
 ## results
 
-* To see the sample intermediate output result, run `python3 ClassSpanFilter.py`.
+* To see the sample intermediate output result, run `python3 ClassDensity.py`.
 
 * To see the **visualization results**, you can clone the repo and open two html files with your local browser.
