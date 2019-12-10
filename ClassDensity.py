@@ -1,4 +1,4 @@
-# This is the basic framework for ClassSpamFilter
+# This is the basic framework for ClassDensity
 import jieba
 import math
 import jieba.analyse
